@@ -3,7 +3,7 @@
 This is a personal project I worked on after following a YouTube tutorial. The goal of this project was to create a movie recommender app using machine learning. I used various techniques to vectorize the movie data and apply similarity measures to recommend movies based on user preferences.
 
 ## Technologies Used:
-- **Machine Learning **: For building the recommendation system. Used scikit-learn.
+- **Machine Learning**: For building the recommendation system. Used scikit-learn.
 - **Streamlit**: For creating the web app interface.
 - **Render**: For deployment, instead of Heroku as suggested in the YouTube tutorial.
 
