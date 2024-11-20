@@ -2,10 +2,13 @@ import streamlit as st
 import pickle
 import requests
 
-def recommend(movie):
+def recommend(movie, num_recommendations):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
-    rec_movies_list = sorted(list(enumerate(distances)), reverse = True, key=lambda x:x[1])[1:6]
+    # rec_movies_list = sorted(list(enumerate(distances)), reverse = True, key=lambda x:x[1])[1:6]
+
+    
+    rec_movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:num_recommendations + 1]
 
     recommended_movies = []
     recommended_movie_posters = []
@@ -32,38 +35,35 @@ selected_movie_name = st.selectbox(
     'How would you like to be contacted?',
     movies_list)
 
-if st.button('Recommend'):
-    names, posters = recommend(selected_movie_name)
+# if st.button('Recommend'):
+#     names, posters = recommend(selected_movie_name)
     
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+#     col1, col2, col3, col4, col5 = st.columns(5)
 
-    with col1:
-        st.text(names[0])
-        st.image(posters[0])
+#     with col1:
+#         st.text(names[0])
+#         st.image(posters[0])
 
-    with col2:
-        st.text(names[1])
-        st.image(posters[1])
+#     with col2:
+#         st.text(names[1])
+#         st.image(posters[1])
 
-    with col3:
-        st.text(names[2])
-        st.image(posters[2])
+#     with col3:
+#         st.text(names[2])
+#         st.image(posters[2])
 
-    with col4:
-        st.text(names[3])
-        st.image(posters[3])    
+#     with col4:
+#         st.text(names[3])
+#         st.image(posters[3])    
     
-    with col5:
-        st.text(names[4])
-        st.image(posters[4])          
-
+#     with col5:
+#         st.text(names[4])
+#         st.image(posters[4])          
 
 num_recommendations = st.slider('How many recommendations would you like?', 1, 10, 5)
-rec_movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:num_recommendations + 1]
-
 if st.button('Recommend'):
-    names, posters = recommend(selected_movie_name)
+    names, posters = recommend(selected_movie_name, num_recommendations)
 
     if names and posters:
         cols = st.columns(len(names))
