@@ -57,3 +57,18 @@ if st.button('Recommend'):
     with col5:
         st.text(names[4])
         st.image(posters[4])          
+
+
+num_recommendations = st.slider('How many recommendations would you like?', 1, 10, 5)
+rec_movies_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:num_recommendations + 1]
+
+if st.button('Recommend'):
+    names, posters = recommend(selected_movie_name)
+
+    if names and posters:
+        cols = st.columns(len(names))
+        for idx, col in enumerate(cols):
+            with col:
+                st.text(names[idx])
+                st.image(posters[idx])
+
