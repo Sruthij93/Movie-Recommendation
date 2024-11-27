@@ -15,8 +15,10 @@ def recommend(movie, num_recommendations):
     for i in rec_movies_list:
         movie_id = movies.iloc[i[0]].movie_id
         details = fetch_movie_details(movie_id)
-        recommended_movie_posters.append(fetch_poster(movie_id))
-        recommended_movies.append(movies.iloc[i[0]].title, 'details': details)
+        recommended_movies.append({
+            'title': movies.iloc[i[0]].title,
+            'details': details
+        })
     return recommended_movies, recommended_movie_posters    
 
 # Function to fetch movie details from TMDB API
